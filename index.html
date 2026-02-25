@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="darkreader-lock">
+  <title>DevFolio X – Hyper‑Modern Dev Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- ============ PREMIUM ASSETS ============ -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- GSAP & ScrollTrigger (optional, keep for future) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- ============ ✦ CURSOR (hidden on touch) ✦ ============ -->
+  <div class="cursor-main" aria-hidden="true"></div>
+  <div class="cursor-trail" aria-hidden="true"></div>
+
+  <!-- ============ ✦ HYPER LOADER ✦ ============ -->
+  <div class="hyper-loader" role="status" aria-label="Loading">
+    <div class="loader-content">
+      <div class="loader-logo">DEVFOLIO X</div>
+      <div class="loader-progress-ring">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle cx="40" cy="40" r="36" fill="none" stroke="currentColor" stroke-width="4" />
+          <circle class="loader-circle" cx="40" cy="40" r="36" fill="none" stroke="url(#gradLoader)" stroke-width="4" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="226.2" />
+        </svg>
+        <div class="loader-percent">0%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SVG Definitions (theme-aware) -->
+  <svg width="0" height="0" style="position:absolute;">
+    <defs>
+      <linearGradient id="gradLoader" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="var(--loader-start)" />
+        <stop offset="100%" stop-color="var(--loader-end)" />
+      </linearGradient>
+      <linearGradient id="gradPrimary" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="var(--grad-start)" />
+        <stop offset="100%" stop-color="var(--grad-end)" />
+      </linearGradient>
+      <radialGradient id="glassGradient">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.2)" />
+        <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
+      </radialGradient>
+    </defs>
+  </svg>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress-container" aria-hidden="true">
+    <div class="scroll-progress-fill"></div>
+  </div>
+
+  <!-- ============ ✦ HEADER (with mobile menu) ✦ ============ -->
+  <header class="main-header glass-panel">
+    <div class="header-container">
+      <div class="logo-area">
+        <span class="brand-glow"></span>
+        <h2 class="brand">DEVFOLIO <span class="brand-x">X</span></h2>
+      </div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <span class="hamburger"></span>
+        </button>
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#experience" class="nav-link">Timeline</a></li>
+          <li><a href="#projects" class="nav-link">Work</a></li>
+          <li><a href="#blog" class="nav-link">Insights</a></li>
+          <li><a href="#contact" class="nav-link">Connect</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="fas fa-sun" aria-hidden="true"></i>
+          <i class="fas fa-moon" aria-hidden="true"></i>
+          <span class="toggle-bg"></span>
+        </button>
+        <a href="#contact" class="hire-btn magnetic-btn">
+          <span>Hire Me</span>
+          <i class="fas fa-bolt" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ ✦ HERO ✦ ============ -->
+  <section id="home" class="hero-section">
+    <canvas id="particleCanvas" class="hero-canvas" role="presentation"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-container">
+      <div class="hero-text">
+        <div class="badge-available">
+          <span class="pulse-dot"></span> Available for work
+        </div>
+        <h1>
+          <span class="hi-text">Hi, I am</span>
+          <span class="gradient-text" data-text="Azad Dhama">Azad Dhama</span>
+        </h1>
+        <div class="dynamic-title">
+          <span class="static-word">I </span>
+          <span class="typed-words"></span>
+          <span class="cursor-blink">|</span>
+        </div>
+        <p class="hero-desc">
+          Architecting high-performance web apps, immersive UI/UX, and scalable digital ecosystems. 
+          <span class="highlight">3+ years</span> of breaking limits.
+        </p>
+        <div class="hero-buttons">
+          <button class="primary-btn magnetic-btn">
+            <span>View masterpiece</span>
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </button>
+          <button class="secondary-btn">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> Digital CV
+          </button>
+        </div>
+        <div class="hero-social">
+          <a href="#" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-icon" aria-label="X"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="Dev.to"><i class="fab fa-dev"></i></a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="profile-orb">
+          <div class="orb-core">
+            <i class="fas fa-code" aria-hidden="true"></i>
+          </div>
+          <div class="ring ring1"></div>
+          <div class="ring ring2"></div>
+          <div class="ring ring3"></div>
+        </div>
+        <div class="floating-tech-icons" aria-hidden="true">
+          <i class="fab fa-react" style="top:15%;left:10%"></i>
+          <i class="fab fa-node-js" style="top:60%;right:15%"></i>
+          <i class="fab fa-python" style="bottom:20%;left:20%"></i>
+          <i class="fas fa-database" style="top:30%;right:25%"></i>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>Scroll to explore</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- ============ ✦ ABOUT ✦ ============ -->
+  <section id="about" class="about-section">
+    <div class="section-header">
+      <h2 class="section-title">About <span>me</span></h2>
+      <p class="section-sub">Developer, creator, problem solver</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card glass-card">
+        <div class="about-icon"><i class="fas fa-route"></i></div>
+        <h3>My journey</h3>
+        <p>Started as a self‑taught coder, now building products used by thousands. Obsessed with performance and interaction design.</p>
+        <ul class="about-info">
+          <li><i class="fas fa-map-pin"></i> India / remote</li>
+          <li><i class="fas fa-briefcase"></i> 3+ years exp</li>
+          <li><i class="fas fa-globe"></i> Freelance available</li>
+        </ul>
+      </div>
+      <div class="stats-dashboard glass-card">
+        <h3>Impact metrics</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-num" data-count="50">0</div><span>+</span>
+            <p>Projects shipped</p>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num" data-count="120">0</div><span>K+</span>
+            <p>Lines of code</p>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num" data-count="10">0</div><span>K+</span>
+            <p>GitHub ⭐</p>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num" data-count="15">0</div><span>+</span>
+            <p>Happy clients</p>
+          </div>
+        </div>
+        <div class="achievement-badge">
+          <i class="fas fa-trophy"></i> Top 5% on Upwork
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ✦ SERVICES ✦ ============ -->
+  <section class="services-section">
+    <div class="section-header">
+      <h2 class="section-title">expertise <span>services</span></h2>
+      <p>Engineering excellence across stack</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card glass-card">
+        <i class="fas fa-cubes"></i>
+        <h3>Full‑Stack MVP</h3>
+        <p>From concept to deploy – React, Node, MongoDB, AWS.</p>
+      </div>
+      <div class="service-card glass-card">
+        <i class="fas fa-laptop-code"></i>
+        <h3>Interactive UI</h3>
+        <p>GSAP, Framer, Three.js – animations that tell stories.</p>
+      </div>
+      <div class="service-card glass-card">
+        <i class="fas fa-shield"></i>
+        <h3>Cyber secure</h3>
+        <p>Auth, encryption, OWASP compliant code.</p>
+      </div>
+      <div class="service-card glass-card">
+        <i class="fas fa-robot"></i>
+        <h3>AI integration</h3>
+        <p>LLMs, vector DBs, smart features.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ✦ SKILLS ✦ ============ -->
+  <section id="skills" class="skills-section">
+    <div class="section-header">
+      <h2 class="section-title">tech <span>arsenal</span></h2>
+      <p>Modern stack, deep proficiency</p>
+    </div>
+    <div class="skills-wrapper">
+      <div class="skill-category">
+        <h3><i class="fas fa-paint-brush"></i> Frontend</h3>
+        <div class="skill-items">
+          <div class="skill-item" data-percent="95">
+            <div class="skill-info"><span>React / Next</span><span class="skill-percent">95%</span></div>
+            <div class="progress-bar"><div style="width:0%"></div></div>
+          </div>
+          <div class="skill-item" data-percent="90">
+            <div class="skill-info"><span>TypeScript</span><span>90%</span></div>
+            <div class="progress-bar"><div style="width:0%"></div></div>
+          </div>
+          <div class="skill-item" data-percent="88">
+            <div class="skill-info"><span>GSAP / Three</span><span>88%</span></div>
+            <div class="progress-bar"><div style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3><i class="fas fa-server"></i> Backend</h3>
+        <div class="skill-items">
+          <div class="skill-item" data-percent="92"><span>Node.js</span><span>92%</span><div class="progress-bar"><div style="width:0%"></div></div></div>
+          <div class="skill-item" data-percent="80"><span>Python (Flask)</span><span>80%</span><div class="progress-bar"><div style="width:0%"></div></div></div>
+          <div class="skill-item" data-percent="85"><span>MongoDB/Postgres</span><span>85%</span><div class="progress-bar"><div style="width:0%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3><i class="fas fa-tools"></i> DevOps & tools</h3>
+        <div class="skill-items">
+          <div class="skill-item" data-percent="75"><span>Docker/K8s</span><span>75%</span><div class="progress-bar"><div style="width:0%"></div></div></div>
+          <div class="skill-item" data-percent="82"><span>CI/CD</span><span>82%</span><div class="progress-bar"><div style="width:0%"></div></div></div>
+          <div class="skill-item" data-percent="95"><span>Git/GitHub</span><span>95%</span><div class="progress-bar"><div style="width:0%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ✦ EXPERIENCE ✦ ============ -->
+  <section id="experience" class="experience-section">
+    <div class="section-header">
+      <h2 class="section-title">career <span>trajectory</span></h2>
+      <p>Roles that shaped my approach</p>
+    </div>
+    <div class="timeline-3d">
+      <div class="timeline-item glass-card">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2022 — present</div>
+        <h3>Frontend Architect</h3>
+        <h4>Creative Syndicate</h4>
+        <p>Led UI re-architecture, design system, reduced bundle size 45%.</p>
+        <div class="tech-tags"><span>React</span><span>GSAP</span><span>Storybook</span></div>
+      </div>
+      <div class="timeline-item glass-card">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2021 — 2022</div>
+        <h3>Full‑Stack Developer</h3>
+        <h4>Nebula Labs</h4>
+        <p>Built real‑time dashboards, REST APIs, WebSocket integration.</p>
+        <div class="tech-tags"><span>Node</span><span>Express</span><span>Mongo</span></div>
+      </div>
+      <div class="timeline-item glass-card">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2020 — 2021</div>
+        <h3>Junior Dev & Intern</h3>
+        <h4>Startup Inc</h4>
+        <p>Developed responsive landing pages, WordPress → headless migration.</p>
+        <div class="tech-tags"><span>JS</span><span>PHP</span><span>SCSS</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ✦ PROJECTS ✦ ============ -->
+  <section id="projects" class="projects-section">
+    <div class="section-header">
+      <h2 class="section-title">featured <span>projects</span></h2>
+      <p>Each pixel tells a story</p>
+    </div>
+    <div class="projects-filter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web apps</button>
+      <button class="filter-btn" data-filter="ui">UI/UX</button>
+      <button class="filter-btn" data-filter="ai">AI</button>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card glass-card" data-category="web">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <i class="fas fa-shield-haltered"></i>
+        </div>
+        <div class="card-content">
+          <h3>Cybersecure Vault</h3>
+          <p>End‑to‑end encrypted file manager, React + Node.</p>
+          <div class="card-footer">
+            <span class="card-tag">Web</span>
+            <a href="#" class="card-link"><i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card glass-card" data-category="ai">
+        <div class="card-media">
+          <i class="fas fa-brain"></i>
+        </div>
+        <div class="card-content">
+          <h3>Neural Dimension Engine</h3>
+          <p>AI visualization with Three.js and TensorFlow.</p>
+          <div class="card-footer">
+            <span class="card-tag">AI</span>
+            <a href="#" class="card-link"><i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card glass-card" data-category="ui">
+        <div class="card-media">
+          <i class="fas fa-palette"></i>
+        </div>
+        <div class="card-content">
+          <h3>Portfolio X</h3>
+          <p>Immersive dev portfolio with liquid animations.</p>
+          <div class="card-footer">
+            <span class="card-tag">UI</span>
+            <a href="#" class="card-link"><i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card glass-card" data-category="web">
+        <div class="card-media">
+          <i class="fas fa-cart-shopping"></i>
+        </div>
+        <div class="card-content">
+          <h3>EcoCart</h3>
+          <p>Sustainable e‑commerce, Next.js & Stripe.</p>
+          <div class="card-footer">
+            <span class="card-tag">Web</span>
+            <a href="#" class="card-link"><i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ✦ BLOG ✦ ============ -->
+  <section id="blog" class="blog-section">
+    <div class="section-header">
+      <h2 class="section-title">latest <span>insights</span></h2>
+      <p>Dev wisdom & tutorials</p>
+    </div>
+    <div class="blog-grid">
+      <article class="blog-card glass-card">
+        <div class="blog-date"><i class="far fa-calendar"></i> Feb 11, 2025</div>
+        <h3>JavaScript deep dive: event loop & microtasks</h3>
+        <p class="blog-excerpt">Understanding concurrency, async patterns, and performance...</p>
+        <a href="#" class="read-more">Read →</a>
+      </article>
+      <article class="blog-card glass-card">
+        <div class="blog-date"><i class="far fa-calendar"></i> Jan 28, 2025</div>
+        <h3>GSAP ScrollTrigger masterclass</h3>
+        <p class="blog-excerpt">Create award‑winning scroll experiences with ease.</p>
+        <a href="#" class="read-more">Read →</a>
+      </article>
+      <article class="blog-card glass-card">
+        <div class="blog-date"><i class="far fa-calendar"></i> Dec 15, 2024</div>
+        <h3>React 19: new features & optimization</h3>
+        <p class="blog-excerpt">How to reduce re‑renders and leverage compiler.</p>
+        <a href="#" class="read-more">Read →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ ✦ TESTIMONIALS ✦ ============ -->
+  <section class="testimonials-section">
+    <div class="section-header">
+      <h2 class="section-title">kind <span>words</span></h2>
+      <p>What collaborators say</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial glass-card">
+        <i class="fas fa-quote-left"></i>
+        <p>“Azad is a rare talent – his code is clean and his designs are mind‑blowing. Delivered ahead of deadline.”</p>
+        <div class="client"><strong>— Priya M.</strong> , CTO at StackFlow</div>
+      </div>
+      <div class="testimonial glass-card">
+        <i class="fas fa-quote-left"></i>
+        <p>“One of the best UI engineers I've worked with. He brought life to our product.”</p>
+        <div class="client"><strong>— Rahul S.</strong> , Lead PM</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ✦ CONTACT ✦ ============ -->
+  <section id="contact" class="contact-section">
+    <div class="section-header">
+      <h2 class="section-title">let's <span>connect</span></h2>
+      <p>Turn your idea into reality</p>
+    </div>
+    <div class="contact-container">
+      <div class="contact-info glass-card">
+        <h3><i class="fas fa-paper-plane"></i> Drop a line</h3>
+        <div class="info-line"><i class="fas fa-envelope"></i> azad.dhama@devfolio.pro</div>
+        <div class="info-line"><i class="fas fa-phone-alt"></i> +91 98765 43210</div>
+        <div class="social-links-big">
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Dev.to"><i class="fab fa-dev"></i></a>
+        </div>
+        <div class="availability">
+          <i class="fas fa-circle"></i> Open for collab
+        </div>
+      </div>
+      <form class="contact-form glass-card" action="#" method="post">
+        <div class="input-group">
+          <input type="text" id="name" name="name" required placeholder=" " />
+          <label for="name">Your name</label>
+        </div>
+        <div class="input-group">
+          <input type="email" id="email" name="email" required placeholder=" " />
+          <label for="email">Email address</label>
+        </div>
+        <div class="input-group">
+          <textarea id="message" name="message" rows="4" required placeholder=" "></textarea>
+          <label for="message">Your message</label>
+        </div>
+        <button type="submit" class="primary-btn fullwidth">
+          <span>Send message</span>
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ ✦ FOOTER ✦ ============ -->
+  <footer class="main-footer">
+    <div class="footer-bg"></div>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h2>DEVFOLIO <span>X</span></h2>
+        <p>Crafting digital frontiers · 2025</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-newsletter">
+        <p>Subscribe for dev insights</p>
+        <div class="newsletter-box">
+          <input type="email" name="newsletter-email" placeholder="your.email@example.com" aria-label="Email for newsletter" />
+          <button aria-label="Subscribe"><i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2025 DevFolio X – open source, open mind. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============ ✦ BACK TO TOP ✦ ============ -->
+  <button class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+
+  <script type="module" src="logic.js"></script>
+</body>
+</html>
