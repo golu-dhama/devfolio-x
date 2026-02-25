@@ -4,7 +4,7 @@
 
 DevFolio X is a cutting‑edge, fully responsive portfolio template designed for developers who want to showcase their work with style. It features a futuristic glass‑morphism aesthetic, interactive UI components, smooth animations, and a seamless mobile experience.
 
-🔗 **Live Demo:** [https://yourusername.github.io/devfolio-x](https://yourusername.github.io/devfolio-x)
+🔗 **Live Demo:** [https://github.com/golu-dhama](https://golu-dhama.github.io/devfolio-x/)
 
 ---
 
@@ -103,4 +103,5 @@ Minimal reflows – transforms and opacity used where possible.
 ***
 
 ## 👨‍💻 Author
+
 Azad Dhama
